@@ -1,3 +1,5 @@
+import { Link,routes } from '@redwoodjs/router'
+
 import { Form, TextField, Submit, useForm, FieldError } from '@redwoodjs/forms'
 import { MetaTags, useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
@@ -12,7 +14,7 @@ const Add_Todo = gql`
   }
 `
 
-const HomePage = ({todo}) => {
+const HomePage = ({ todo }) => {
   const formMethods = useForm({ mode: 'onBlur' })
 
   const [create, { loading, error }] = useMutation(Add_Todo, {
@@ -23,7 +25,6 @@ const HomePage = ({todo}) => {
     refetchQueries: [
       {
         query: TodosQuery,
-
       },
     ],
   })
@@ -33,24 +34,43 @@ const HomePage = ({todo}) => {
     create({ variables: { input: data } })
   }
   return (
-    <>
+    <div className=" ">
       <MetaTags title="Home" description="Home page" />
       <Toaster />
-      <h1>TODO APP</h1>
-      <Form
-        onSubmit={onSubmit}
-        config={{ mode: 'onBlur' }}
-        error={error}
-        formMethods={formMethods}
-      >
-        <TextField name="name" validation={{ required: true }} defaultValue={todo?.name}/>
+      <div className=' h-screen'>
+        <Link to={routes.todoList()} className=" flex justify-center text-slate-200  mb-10 w-full bg-green-700  py-8 text-2xl font-bold tracking-wide">
+          TODO APP
+        </Link>
 
-        <Submit disabled={loading}>Add</Submit>
-        <br />
-        <FieldError name="name" />
-      </Form>
-<TodosCell/>
-    </>
+        <Form
+          onSubmit={onSubmit}
+          config={{ mode: 'onBlur' }}
+          error={error}
+          formMethods={formMethods}
+          className="flex flex-col  items-center justify-center  "
+        >
+          <TextField
+            name="name"
+            validation={{ required: true }}
+            // defaultValue={todo?.name}
+            className="w-96 rounded-xl border-2 py-2 pl-4 "
+          />
+          <FieldError name="name" className="py-4 font-bold text-red-500" />
+
+          <Submit
+            disabled={loading}
+            className="mt-2 w-96 rounded-xl bg-green-500 px-8 py-2 font-bold hover:bg-green-600"
+          >
+            ADD
+          </Submit>
+
+          <br />
+        </Form>
+        <div >
+          <TodosCell />
+        </div>
+      </div>
+    </div>
   )
 }
 

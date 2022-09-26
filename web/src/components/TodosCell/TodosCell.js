@@ -19,7 +19,10 @@ export const Failure = ({ error }) => (
 
 export const Success = ({todos}) => {
 
-  return   <Todo todos={todos}/>
+  return <div className="">
+ <Todo todos={todos}/>
+  </div>
+
 
    }
 
