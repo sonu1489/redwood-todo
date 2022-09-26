@@ -47,7 +47,7 @@ const HomePage = ({ todo }) => {
           config={{ mode: 'onBlur' }}
           error={error}
           formMethods={formMethods}
-          className="flex flex-col  items-center justify-center  "
+          className="flex flex-col  items-center justify-center "
         >
           <TextField
             name="name"

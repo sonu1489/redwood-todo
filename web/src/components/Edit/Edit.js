@@ -71,7 +71,7 @@ const Edit = ({ todo }) => {
     <div>
       {!edit ? (
         <>
-          <div className="flex justify-between mx-40   ">
+          <div className="flex justify-between mx-60    ">
 
             <h1 className="pb-2 text-xl  font-normal">{todo.name}</h1>
 
