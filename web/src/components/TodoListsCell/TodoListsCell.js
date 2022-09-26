@@ -21,7 +21,7 @@ export const Success = ({ todos }) => {
     <>
       {todos.map((todo) => {
         return (
-          <div key={todo.id} className="w-96">
+          <div key={todo.id} className="w-60 md:w-96">
             <h1 className="text-xl font-semibold mb-4 hover:bg-blue-300 uppercase bg-slate-200 drop-shadow-md  py-2 rounded-lg text-center">{todo.name}</h1>
           </div>
         )

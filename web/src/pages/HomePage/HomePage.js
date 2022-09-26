@@ -37,7 +37,7 @@ const HomePage = ({ todo }) => {
     <div className=" ">
       <MetaTags title="Home" description="Home page" />
       <Toaster />
-      <div className=' h-screen'>
+      <div className=''>
         <Link to={routes.todoList()} className=" flex justify-center text-slate-200  mb-10 w-full bg-green-700  py-8 text-2xl font-bold tracking-wide">
           TODO APP
         </Link>
@@ -53,13 +53,13 @@ const HomePage = ({ todo }) => {
             name="name"
             validation={{ required: true }}
             // defaultValue={todo?.name}
-            className="w-96 rounded-xl border-2 py-2 pl-4 "
+            className="w-60  md:w-96 rounded-xl border-2 py-2 pl-4 "
           />
           <FieldError name="name" className="py-4 font-bold text-red-500" />
 
           <Submit
             disabled={loading}
-            className="mt-2 w-96 rounded-xl bg-green-500 px-8 py-2 font-bold hover:bg-green-600"
+            className="mt-2 mb-8 w-60 md:w-96 rounded-xl bg-green-500 px-8 py-2 font-bold hover:bg-green-600"
           >
             ADD
           </Submit>
