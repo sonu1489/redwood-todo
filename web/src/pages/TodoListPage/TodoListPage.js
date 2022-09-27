@@ -25,8 +25,7 @@
 
 // export default TodoListPage
 
-
-import { Link,routes } from '@redwoodjs/router'
+import { Link, routes } from '@redwoodjs/router'
 
 import { Form, TextField, Submit, useForm, FieldError } from '@redwoodjs/forms'
 import { MetaTags, useMutation } from '@redwoodjs/web'
@@ -65,8 +64,11 @@ const TodoListPage = ({ todo }) => {
     <div className=" ">
       <MetaTags title="Home" description="Home page" />
       <Toaster />
-      <div className=''>
-        <Link to={routes.home()} className=" flex justify-center text-slate-200  mb-10 w-full bg-green-700  py-8 text-2xl font-bold tracking-wide">
+      <div className="">
+        <Link
+          to={routes.home()}
+          className=" mb-10 flex w-full  justify-center bg-green-700 py-8  text-2xl font-bold tracking-wide text-slate-200"
+        >
           TODO APP
         </Link>
 
@@ -81,20 +83,39 @@ const TodoListPage = ({ todo }) => {
             name="name"
             validation={{ required: true }}
             // defaultValue={todo?.name}
-            className="w-60  md:w-96 rounded-xl border-2 py-2 pl-4 "
+            className="w-60  rounded-xl border-2 py-2 pl-4 md:w-96 "
           />
           <FieldError name="name" className="py-4 font-bold text-red-500" />
 
           <Submit
             disabled={loading}
-            className="mt-2 mb-8 w-60 md:w-96 rounded-xl bg-green-500 px-8 py-2 font-bold hover:bg-green-600"
+            className="mt-2 mb-8 w-60 rounded-xl bg-green-500 px-8 py-2 font-bold hover:bg-green-600 md:w-96"
           >
-            ADD
+            {loading ? (
+              <svg className="h-5 animate-spin text-center" viewBox="0 0 100 100">
+                <path
+                  fill="#fff"
+                  d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+                >
+                  <animateTransform
+                    attributeName="transform"
+                    attributeType="XML"
+                    type="rotate"
+                    dur="1s"
+                    from="0 50 50"
+                    to="360 50 50"
+                    repeatCount="indefinite"
+                  />
+                </path>
+              </svg>
+            ) :
+              "ADD"
+            }
           </Submit>
 
           <br />
         </Form>
-        <div >
+        <div>
           <TodosCell />
         </div>
       </div>

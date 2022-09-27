@@ -79,8 +79,10 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import TodoListsCell from 'src/components/TodoListsCell/TodoListsCell.js'
+import { useAuth } from '@redwoodjs/auth'
 
 const HomePage = () => {
+  const { isAuthenticated, currentUser, logOut } = useAuth()
   return (
     <>
       <MetaTags title="TodoList" description="TodoList page" />
@@ -93,6 +95,16 @@ const HomePage = () => {
           >
             ADD ITEM
           </Link>
+          {isAuthenticated ? (
+            <div>
+              <span>Logged in as {currentUser.email}</span>{' '}
+              <button type="button" onClick={logOut}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to={routes.login()}>Login</Link>
+          )}
         </div>
 
         <TodoListsCell />
