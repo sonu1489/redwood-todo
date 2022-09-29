@@ -6,16 +6,19 @@ import { MetaTags, useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 import TodosCell from 'src/components/TodosCell/TodosCell.js'
 import { QUERY as TodosQuery } from 'src/components/TodosCell/TodosCell.js'
+import { useAuth } from '@redwoodjs/auth'
 
 const Add_Todo = gql`
   mutation addTodoMutation($input: CreateTodoInput!) {
     createTodo(input: $input) {
       id
+
     }
   }
 `
 
 const TodoListPage = ({ todo }) => {
+  const {currentUser} = useAuth()
   const formMethods = useForm({ mode: 'onBlur' })
 
   const [create, { loading, error }] = useMutation(Add_Todo, {
@@ -31,8 +34,12 @@ const TodoListPage = ({ todo }) => {
   })
 
   const onSubmit = (data) => {
-    console.log(data)
-    create({ variables: { input: data } })
+    console.log(data,"dataaaaaa")
+    const payload= {
+      ...data,userId:currentUser.id
+    }
+    console.log(payload,"payload");
+    create({ variables: { input: payload } })
   }
   return (
     <div className=" ">

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useMutation } from '@redwoodjs/web'
 import { QUERY as TodosQuery } from '../TodosCell/TodosCell'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
+import { useAuth } from '@redwoodjs/auth'
 
 const UPDATE_TODO_MUTATION = gql`
   mutation UpdatePostMutation($id: Int!, $input: UpdateTodoInput!) {
@@ -21,6 +22,7 @@ const DELETE_TODO_MUTATION = gql`
 `
 
 const Edit = ({ todo }) => {
+  const {hasRole}= useAuth()
   const formMethods = useForm({ mode: 'onBlur' })
 
   const [edit, setEdit] = useState(false)
@@ -73,7 +75,7 @@ const Edit = ({ todo }) => {
         <>
           <div className="flex justify-between  mx-8 md:mx-60    ">
 
-            <h1 className="pb-2 text-xl  font-normal">{todo.name}</h1>
+            <h1 className="pb-2 text-xl   font-normal">{todo.name}</h1>
 
             <div className="font-semibold">
               <button
@@ -82,7 +84,10 @@ const Edit = ({ todo }) => {
               >
                 Edit
               </button>
+              {hasRole("admin") &&(
               <button className='text-red-700' onClick={() => handleDelete(todo.id)}>Delete</button>
+
+              )}
             </div>
           </div>
         </>

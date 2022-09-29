@@ -1,4 +1,4 @@
-import { todos, todo, deleteTodo } from './todos'
+import { todos, todo, createTodo, updateTodo, deleteTodo } from './todos'
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.
@@ -17,6 +17,24 @@ describe('todos', () => {
     const result = await todo({ id: scenario.todo.one.id })
 
     expect(result).toEqual(scenario.todo.one)
+  })
+
+  scenario('creates a todo', async () => {
+    const result = await createTodo({
+      input: { userId: 8840912 },
+    })
+
+    expect(result.userId).toEqual(8840912)
+  })
+
+  scenario('updates a todo', async (scenario) => {
+    const original = await todo({ id: scenario.todo.one.id })
+    const result = await updateTodo({
+      id: original.id,
+      input: { userId: 2717528 },
+    })
+
+    expect(result.userId).toEqual(2717528)
   })
 
   scenario('deletes a todo', async (scenario) => {

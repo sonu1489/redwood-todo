@@ -1,4 +1,5 @@
 import { db } from 'src/lib/db'
+import { requireAuth } from 'src/lib/auth'
 
 export const todos = () => {
   return db.todo.findMany()
@@ -24,6 +25,7 @@ export const updateTodo = ({ id, input }) => {
 }
 
 export const deleteTodo = ({ id }) => {
+  requireAuth({ roles: 'admin' })
   return db.todo.delete({
     where: { id },
   })

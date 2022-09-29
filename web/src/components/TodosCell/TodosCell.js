@@ -1,10 +1,12 @@
-import Todo from "../Todo/Todo"
+import Todo from '../Todo/Todo'
+import { useAuth } from '@redwoodjs/auth'
 
 export const QUERY = gql`
   query TodosQuery {
     todos {
       id
       name
+userId
     }
   }
 `
@@ -17,13 +19,17 @@ export const Failure = ({ error }) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>
 )
 
-export const Success = ({todos}) => {
+export const Success = ({ todos }) => {
+  console.log(todos,"todos")
+  const { currentUser } = useAuth()
 
-  return <div className="">
- <Todo todos={todos}/>
-  </div>
-
-
-   }
-
-
+  console.log(currentUser, 'currentUser')
+  const filterData = ()=>{
+   return todos.filter((item)=>currentUser.id === item.userId)
+  }
+  return (
+    <div >
+      <Todo todos={filterData()} />
+    </div>
+  )
+}

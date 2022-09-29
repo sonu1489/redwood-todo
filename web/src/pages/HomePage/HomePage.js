@@ -6,7 +6,7 @@ import TodoListsCell from 'src/components/TodoListsCell/TodoListsCell.js'
 import { useAuth } from '@redwoodjs/auth'
 
 const HomePage = () => {
-  const { isAuthenticated, currentUser, logOut } = useAuth()
+  const { isAuthenticated, currentUser, logOut,hasRole } = useAuth()
   return (
     <>
       <MetaTags title="TodoList" description="TodoList page" />
@@ -19,6 +19,7 @@ const HomePage = () => {
             className="text-lime-500    hover:text-lime-400  "
             to={routes.todoList()}
           >
+
             ADD ITEM
           </Link>
           </div>
